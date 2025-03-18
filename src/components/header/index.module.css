@@ -1,0 +1,14 @@
+header {
+  width: 100vw;
+  padding: 21px 0px;
+}
+
+.item a{
+  font-size: 16px;
+  color: #443133;
+}
+
+.logo {
+  font-size: 48px;
+  font-family: "Logo";
+}

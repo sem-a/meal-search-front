@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Layout from "./components/layout";
+import { Container } from "./components/container";
+import { Button, FormItem, Input, Label, Select } from "./components/form";
+
+const options = ["1234", "5678", "90123"];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Container>
+        <FormItem>
+          <Label htmlFor="ingredients">Желаемые ингредиенты:</Label>
+          <Input id="ingredients" name="ingredients" />
+        </FormItem>
+        <FormItem>
+          <Label htmlFor="cuisine">Кухня:</Label>
+          <Select id="cuisine" name="cuisine" options={options} />
+        </FormItem>
+        <FormItem>
+          <Button>найти</Button>
+        </FormItem>
+      </Container>
+    </Layout>
   );
 }
 
