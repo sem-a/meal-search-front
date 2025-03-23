@@ -1,59 +1,190 @@
-import React from "react";
-import styles from "./index.module.css";
+import React, { useState } from "react";
+import {
+  Button,
+  FormFlex,
+  FormItem,
+  IngredientsList,
+  Input,
+  Label,
+  Select,
+  StepsList,
+  Textarea,
+} from "../form-item";
+import { useAddRecipeMutation } from "../../app/services/recipes";
 
-type InputProps = {
-  type?: React.HTMLInputTypeAttribute | undefined;
-  name?: string | undefined;
-  id?: string | undefined;
-};
+export const FormAdd = () => {
+  const [addRecipe] = useAddRecipeMutation();
 
-type LabelProps = {
-  htmlFor?: string | undefined;
-  children: React.ReactNode;
-};
+  const [ingredients, setIngredients] = useState<
+    { name: string; quantity: string; unit: string }[]
+  >([]);
+  const [steps, setSteps] = useState<string[]>([]);
 
-type SelectProps = {
-  name?: string | undefined;
-  id?: string | undefined;
-  options?: any[];
-};
+  const [newIngredient, setNewIngredient] = useState<string>("");
+  const [quantity, setQuantity] = useState<string>("");
+  const [unit, setUnit] = useState<string>("г");
 
-type ButtonProps = {
-  children: React.ReactNode;
-};
+  const [newStep, setNewStep] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [cuisine, setCuisine] = useState<string>("");
+  const [photo, setPhoto] = useState<string>("");
 
-type FormItemProps = {
-  children: React.ReactNode;
-};
+  const handleSelect = (e: any) => {
+    setUnit(e.target.value);
+  };
 
-export const Input: React.FC<InputProps> = ({ type = "text", name, id }) => {
+  const handleAddIngredient = () => {
+    if (newIngredient && quantity) {
+      const temp = {
+        name: newIngredient,
+        quantity,
+        unit,
+      };
+      setIngredients([...ingredients, temp]);
+      setNewIngredient("");
+      setQuantity("");
+    }
+  };
+  const handleDeleteIngredient = (index: number) => {
+    const updatedIngredients = ingredients.filter((_, i) => i !== index);
+    setIngredients(updatedIngredients);
+  };
+  const handleAddSteps = () => {
+    if (newStep) {
+      setSteps([...steps, newStep.trim()]);
+      setNewStep("");
+    }
+  };
+  const handleDeleteSteps = (index: number) => {
+    const updatedSteps = steps.filter((_, i) => i !== index);
+    setSteps(updatedSteps);
+  };
+
+  const handleSubmitForm = async () => {
+    const data = {
+      title: name,
+      description,
+      cuisine,
+      ingredients,
+      steps,
+      photo,
+    };
+
+    try {
+      await addRecipe(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <input type={type} name={name} id={id} className={styles.customInput} />
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
+      <FormItem>
+        <Label htmlFor="name">Имя рецепта:</Label>
+        <Input
+          name="name"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </FormItem>
+      <FormItem>
+        <Label htmlFor="description">Описание рецепта:</Label>
+        <Textarea
+          id="description"
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </FormItem>
+      <FormItem>
+        <Label htmlFor="cuisine">Кухня:</Label>
+        <Input
+          id="cuisine"
+          name="cuisine"
+          value={cuisine}
+          onChange={(e) => setCuisine(e.target.value)}
+        />
+      </FormItem>
+      <FormItem>
+        <Label htmlFor="photo">Ссылка на фото:</Label>
+        <Input
+          id="photo"
+          name="photo"
+          value={photo}
+          onChange={(e) => setPhoto(e.target.value)}
+        />
+      </FormItem>
+      <FormItem>
+        <Label htmlFor="ingredients">Ингредиенты:</Label>
+        <IngredientsList list={ingredients} onClick={handleDeleteIngredient} />
+        <FormFlex
+          display="grid"
+          gridTemplateColumns="3fr 1fr 1fr 1fr"
+          alignItems="flex-end"
+          gap="7px"
+        >
+          <FormItem>
+            <Label>Название:</Label>
+            <Input
+              id="ingredients"
+              name="ingredients"
+              value={newIngredient}
+              onChange={(e) => {
+                setNewIngredient(e.target.value);
+              }}
+            />
+          </FormItem>
+          <FormItem>
+            <Label>Кол-во</Label>
+            <Input
+              id="quantity"
+              name="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </FormItem>
+          <FormItem>
+            <Label>Ед.</Label>
+            <Select
+              id="unit"
+              name="unit"
+              options={["г", "кг", "мл", "л", "шт"]}
+              value={unit}
+              onChange={handleSelect}
+            />
+          </FormItem>
+          <Button onClick={handleAddIngredient}>добавить</Button>
+        </FormFlex>
+      </FormItem>
+      <FormItem>
+        <Label htmlFor="steps">Шаги:</Label>
+        <StepsList list={steps} onClick={handleDeleteSteps} />
+        <FormFlex
+          display="grid"
+          gridTemplateColumns="4fr 1fr"
+          alignItems="flex-end"
+          gap="7px"
+        >
+          <Input
+            id="steps"
+            name="steps"
+            value={newStep}
+            onChange={(e) => {
+              setNewStep(e.target.value);
+            }}
+          />
+          <Button onClick={handleAddSteps}>добавить</Button>
+        </FormFlex>
+      </FormItem>
+      <FormItem>
+        <Button onClick={handleSubmitForm}>добавить рецепт</Button>
+      </FormItem>
+    </form>
   );
-};
-
-export const Label: React.FC<LabelProps> = ({ htmlFor, children }) => {
-  return (
-    <label htmlFor={htmlFor} className={styles.customLabel}>
-      {children}
-    </label>
-  );
-};
-
-export const Select: React.FC<SelectProps> = ({ name, id, options }) => {
-  return (
-    <select name={name} id={id} className={styles.customSelect}>
-      {options?.map((el, index) => (
-        <option key={index}>{el}</option>
-      ))}
-    </select>
-  );
-};
-
-export const Button: React.FC<ButtonProps> = ({ children }) => {
-  return <button className={styles.customButton}>{children}</button>;
-};
-
-export const FormItem: React.FC<FormItemProps> = ({ children }) => {
-  return <div className={styles.formItem}>{children}</div>;
 };

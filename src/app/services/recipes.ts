@@ -42,3 +42,11 @@ export const recipesApi = api.injectEndpoints({
     }),
   }),
 });
+
+export const {
+  useGetAllRecipesQuery,
+  useGetRecipeForIdQuery,
+  useAddRecipeMutation,
+  useEditRecipeMutation,
+  useDeleteRecipeMutation,
+} = recipesApi;

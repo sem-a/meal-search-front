@@ -1,7 +1,8 @@
 import React from "react";
 import Layout from "./components/layout";
 import { Container } from "./components/container";
-import { Button, FormItem, Input, Label, Select } from "./components/form";
+import { Button, FormItem, Input, Label, Select } from "./components/form-item";
+import Card from "./components/card";
 
 const options = ["1234", "5678", "90123"];
 
@@ -18,7 +19,7 @@ function App() {
           <Select id="cuisine" name="cuisine" options={options} />
         </FormItem>
         <FormItem>
-          <Button>найти</Button>
+          <Button onClick={() => {}}>найти</Button>
         </FormItem>
       </Container>
     </Layout>

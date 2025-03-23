@@ -8,10 +8,10 @@ export interface Recipes {
   cuisine: string;
   ingredients: {
     name: string;
-    quantity: number;
+    quantity: string;
     unit: string;
   }[];
-  steps: string;
+  steps: string[];
   photo: string;
 }
 
