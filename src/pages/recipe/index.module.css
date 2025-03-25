@@ -1,0 +1,63 @@
+.container {
+  padding: 21px 0px;
+  width: 1024px;
+  margin: 0 auto;
+}
+
+.title h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 21px;
+}
+
+.flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 105px;
+}
+
+.flex img {
+  width: 414px;
+  height: 322px;
+  object-fit: cover;
+}
+
+.bodyTitle h2 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.bodyTitle p {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.ingredients {
+  margin-top: 21px;
+}
+
+ul.ingredientsList {
+  margin-top: 21px;
+  margin-left: 14px;
+}
+
+li.ingredientItem {
+  list-style: disc;
+  font-size: 20px;
+  font-weight: 400;
+}
+ol.steps {
+  margin-top: 21px;
+  margin-left: 14px;
+}
+
+li.stepItem {
+  list-style: decimal;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.recipe {
+  margin-top: 42px;
+}

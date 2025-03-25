@@ -14,7 +14,7 @@ const Header = () => {
             </li>
             <li className={styles.logo}>MealSearch</li>
             <li className={styles.item}>
-              <Link to={PATHS.admin}>Изменить</Link>
+              <Link to={PATHS.admin}>Добавить</Link>
             </li>
           </Flex>
         </ul>

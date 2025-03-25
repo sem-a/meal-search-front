@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/layout";
 import { Container } from "../../components/container";
-import { FormAdd } from "../../components/form";
+import { FormAdd } from "../../components/form-add";
 
 const Admin = () => {
   return (

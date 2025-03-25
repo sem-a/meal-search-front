@@ -10,10 +10,23 @@ export const recipesApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    getRecipeForId: builder.query<RecipesData, string>({
+    getRecipeForId: builder.query<
+      Recipes & {
+        _id?: string;
+        ingredients: Recipes["ingredients"] & { _id?: string };
+      },
+      string
+    >({
       // получение рецепта по айди
       query: (id) => ({
-        url: `/recipes/${id}`,
+        url: `/recipes/get/${id}`,
+        method: "GET",
+      }),
+    }),
+    searchRecipes: builder.mutation<RecipesData, string>({
+      // поиск рецептов
+      query: (ingredients) => ({
+        url: `/recipes/search?params=${ingredients}`,
         method: "GET",
       }),
     }),
@@ -28,7 +41,7 @@ export const recipesApi = api.injectEndpoints({
     editRecipe: builder.mutation<RecipesData, Recipes>({
       // изменить рецепт
       query: (data) => ({
-        url: "/recipes/edit",
+        url: `/recipes/edit?id=${data._id}`,
         method: "PUT",
         body: data,
       }),
@@ -49,4 +62,5 @@ export const {
   useAddRecipeMutation,
   useEditRecipeMutation,
   useDeleteRecipeMutation,
+  useSearchRecipesMutation,
 } = recipesApi;

@@ -3,10 +3,12 @@ import { RootState } from "../../app/store";
 import { recipesApi } from "../../app/services/recipes";
 
 export interface Recipes {
+  _id?: string;
   title: string;
   description: string;
   cuisine: string;
   ingredients: {
+    _id?: string;
     name: string;
     quantity: string;
     unit: string;
