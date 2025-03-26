@@ -1,63 +1,58 @@
-.container {
-  padding: 21px 0px;
-  width: 1024px;
-  margin: 0 auto;
+.loadingMessage,
+.errorMessage {
+  text-align: center;
+  margin: 20px 0;
 }
 
-.title h1 {
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 21px;
+.gridContainer {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.flex {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 105px;
+.gridHeader {
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #ddd;
 }
 
-.flex img {
-  width: 414px;
-  height: 322px;
-  object-fit: cover;
+.gridItem {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fbfbfb;
 }
 
-.bodyTitle h2 {
-  font-size: 26px;
-  font-weight: 700;
+.editButton,
+.deleteButton {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.bodyTitle p {
-  font-size: 20px;
-  font-weight: 400;
+.editButton {
+  background-color: #007bff;
+  color: white;
 }
 
-.ingredients {
-  margin-top: 21px;
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
 }
 
-ul.ingredientsList {
-  margin-top: 21px;
-  margin-left: 14px;
+.editButton:hover {
+  background-color: #0056b3;
 }
 
-li.ingredientItem {
-  list-style: disc;
-  font-size: 20px;
-  font-weight: 400;
-}
-ol.steps {
-  margin-top: 21px;
-  margin-left: 14px;
+.deleteButton:hover {
+  background-color: #c82333;
 }
 
-li.stepItem {
-  list-style: decimal;
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.recipe {
-  margin-top: 42px;
+.editButton:active,
+.deleteButton:active {
+  opacity: 0.8;
 }

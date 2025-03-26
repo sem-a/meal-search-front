@@ -23,6 +23,19 @@ export const recipesApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    getRecipeForUserId: builder.query<
+      (Recipes & {
+        _id?: string;
+        ingredients: Recipes["ingredients"] & { _id?: string };
+      })[],
+      void
+    >({
+      // получение рецепта по айди
+      query: () => ({
+        url: `/recipes/user`,
+        method: "GET",
+      }),
+    }),
     searchRecipes: builder.mutation<RecipesData, string>({
       // поиск рецептов
       query: (ingredients) => ({
@@ -63,4 +76,5 @@ export const {
   useEditRecipeMutation,
   useDeleteRecipeMutation,
   useSearchRecipesMutation,
+  useGetRecipeForUserIdQuery,
 } = recipesApi;

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { Layout } from "antd";
+import React from "react";
 import styles from "./index.module.css";
+import Loading from "../loading";
 
 type ContainerProps = {
   children: React.ReactNode;
@@ -12,9 +14,8 @@ type FlexProps = {
     | "center"
     | "flex-start"
     | "flex-end"
-    | "space-between"
     | "space-around"
-    | "space-evenly";
+    | "space-between";
   gap?: string;
 };
 
@@ -26,16 +27,10 @@ export const Flex: React.FC<FlexProps> = ({
   children,
   alignItems = "center",
   justifyContent = "center",
-  gap = "21px",
+  gap,
 }) => {
-  const style = {
-    alignItems,
-    justifyContent,
-    gap,
-  };
-
   return (
-    <div style={style} className={styles.flex}>
+    <div style={{ display: "flex", alignItems, justifyContent, gap }}>
       {children}
     </div>
   );

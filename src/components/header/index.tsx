@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Container, Flex } from "../container";
 import styles from "./index.module.css";
 import { PATHS } from "../../paths";
+import { Container, Flex } from "../containers";
 
 const Header = () => {
   return (
@@ -14,7 +14,7 @@ const Header = () => {
             </li>
             <li className={styles.logo}>MealSearch</li>
             <li className={styles.item}>
-              <Link to={PATHS.admin}>Добавить</Link>
+              <Link to={PATHS.add}>Добавить</Link>
             </li>
           </Flex>
         </ul>

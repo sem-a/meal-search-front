@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import Layout from "./components/layout";
-import { Container } from "./components/container";
-import { Button, FormItem, Input, Label, Select } from "./components/form-item";
-import Card from "./components/card";
 import { useSearchRecipesMutation } from "./app/services/recipes";
 import { Recipes } from "./features/recipes/recipesSlice";
 
@@ -24,39 +21,7 @@ function App() {
     }
   };
 
-  return (
-    <Layout>
-      <Container>
-        <FormItem>
-          <Label htmlFor="ingredients">Желаемые ингредиенты:</Label>
-          <Input
-            id="ingredients"
-            name="ingredients"
-            value={ingredients}
-            onChange={(e) => {
-              setIngredients(e.target.value);
-            }}
-          />
-        </FormItem>
-        <FormItem>
-          <Button onClick={handleSearch}>найти</Button>
-        </FormItem>
-
-        {recipes
-          ? recipes.map((item) => (
-              <Card
-                key={item._id}
-                id={item._id}
-                title={item.title}
-                description={item.description}
-                ingredients={item.ingredients}
-                photo={item.photo}
-              />
-            ))
-          : "Начните поиск рецептов!"}
-      </Container>
-    </Layout>
-  );
+  return <div></div>;
 }
 
 export default App;

@@ -1,6 +1,6 @@
 export const PATHS = {
   home: "/",
-  admin: "/admin",
+  add: "/add",
   recipe: "/recipe",
   edit: "/edit",
   api: "http://localhost:8000/api/",
