@@ -9,7 +9,7 @@ const Layout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Header />
-      {children}
+      <div style={{paddingTop: '150px'}}>{children}</div>
     </>
   );
 };

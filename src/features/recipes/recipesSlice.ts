@@ -15,11 +15,9 @@ export interface Recipes {
   }[];
   steps: string[];
   photo: string;
-  user?: string;
 }
 
 export interface RecipesData {
-  message: string;
   recipes: Recipes[];
 }
 

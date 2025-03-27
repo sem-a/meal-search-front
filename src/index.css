@@ -122,3 +122,11 @@ body {
   background-color: #fce4a4;
   color: #443133;
 }
+
+.content {
+  margin-top: 42px; 
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  padding-bottom: 42px;
+}

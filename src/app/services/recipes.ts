@@ -36,7 +36,7 @@ export const recipesApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    searchRecipes: builder.mutation<RecipesData, string>({
+    searchRecipes: builder.mutation<Recipes[], string>({
       // поиск рецептов
       query: (ingredients) => ({
         url: `/recipes/search?params=${ingredients}`,
@@ -62,7 +62,7 @@ export const recipesApi = api.injectEndpoints({
     deleteRecipe: builder.mutation<RecipesData, string>({
       // удалить рецепт
       query: (id) => ({
-        url: `/recipes/${id}`,
+        url: `/recipes/delete/${id}`,
         method: "DELETE",
       }),
     }),

@@ -1,228 +1,139 @@
-import { Alert, Card } from "antd";
-import { Button, Form, Input } from "antd";
-import { NamePath } from "antd/es/form/interface";
-import TextArea from "antd/es/input/TextArea";
+import React from "react";
 import styles from "./index.module.css";
 
-type PropsCustomButton = {
-  children: React.ReactNode;
-  htmlType?: "button" | "submit" | "reset" | undefined;
-  onClick?: () => void;
-  type?: "link" | "text" | "default" | "primary" | "dashed" | undefined;
-  danger?: boolean;
-  loading?:
-    | boolean
-    | {
-        delay?: number | undefined;
-      }
-    | undefined;
-  shape?: "default" | "circle" | "round" | undefined;
-  icon?: React.ReactNode;
-  disabled?: boolean;
-};
-
-type PropsCustomInput = {
-  name: string;
+type InputProps = {
+  type?: React.HTMLInputTypeAttribute | undefined;
   placeholder?: string;
-  type?: string;
+  id?: string;
+  name?: string;
+  value?: string | number | readonly string[] | undefined;
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
-type PropsCustomTextArea = {
-  name: string;
-  placeholder?: string;
-  type?: string;
-};
-
-type PropsImageCheckBox = {
-  id: string;
-  src: string;
-  alt: string;
-  checked?: boolean;
-  onChange?: (id: string, checked: boolean) => void;
-};
-
-type PropsErrorMessage = {
-  message?: string;
-};
-
-type PropsPasswordInput = {
-  name: string;
-  placeholder: string;
-  dependencies?: NamePath[];
-};
-
-type PropsCustomCard = {
-  children: React.ReactNode;
-  title?: string;
-  bordered?: boolean;
-  width?: string;
-  backgroundColor?: string;
-};
-
-export const PasswordInput: React.FC<PropsPasswordInput> = ({
-  name,
+export const CustomInput: React.FC<InputProps> = ({
+  type,
   placeholder,
-  dependencies,
+  id,
+  name,
+  value,
+  onChange,
 }) => {
   return (
-    <Form.Item
+    <input
+      type={type}
+      placeholder={placeholder}
+      id={id}
       name={name}
-      dependencies={dependencies}
-      hasFeedback
-      rules={[
-        {
-          required: true,
-          message: "Обязательное поле",
-        },
-        ({ getFieldValue }) => ({
-          validator(_, value) {
-            if (!value) {
-              return Promise.resolve();
-            }
-            if (name === "confirmPassword") {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error("Пароли должны совпадать"));
-            } else {
-              if (value.length < 6) {
-                return Promise.reject(
-                  new Error("Длина пароля должна быть не менее 6 символов")
-                );
-              }
-              return Promise.resolve();
-            }
-          },
-        }),
-      ]}
-    >
-      <Input.Password
-        placeholder={placeholder}
-        size="large"
-        className={styles.passwordInput}
-      />
-    </Form.Item>
+      value={value}
+      onChange={onChange}
+      className={styles.customInput}
+    />
   );
 };
 
-export const ErrorMessage: React.FC<PropsErrorMessage> = ({ message }) => {
-  if (!message) {
-    return null;
-  }
-  return <Alert message={message} type="error" />;
+type SelectProps = {
+  options: string[];
+  onChange?: React.ChangeEventHandler<HTMLSelectElement> | undefined;
+  value?: string | number | readonly string[] | undefined;
 };
 
-export const ImageCheckbox: React.FC<PropsImageCheckBox> = ({
+export const CustomSelect: React.FC<SelectProps> = ({
+  options,
+  onChange,
+  value,
+}) => {
+  return (
+    <select value={value} onChange={onChange} className={styles.customSelect}>
+      {options.map((item) => (
+        <option>{item}</option>
+      ))}
+    </select>
+  );
+};
+
+type TextareaProps = {
+  placeholder?: string;
+  id?: string;
+  name?: string;
+  value?: string | number | readonly string[] | undefined;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement> | undefined;
+};
+
+export const CustomTextarea: React.FC<TextareaProps> = ({
+  placeholder,
   id,
-  src,
-  alt,
-  checked,
+  name,
+  value,
   onChange,
 }) => {
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(id, event.target.checked);
-    }
-  };
-
   return (
-    <label className={styles.imageCheckboxLabel}>
-      <input
-        type="checkbox"
-        id={id}
-        className={styles.imageCheckbox}
-        checked={checked}
-        onChange={handleOnChange}
-      />
-      <div className={styles.imageContainer}>
-        <img src={src} alt={alt} className={styles.imageCheckboxImage} />
-      </div>
+    <textarea
+      id={id}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={styles.customTextarea}
+    />
+  );
+};
+
+type ButtonProps = {
+  children: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
+
+export const CustomButton: React.FC<ButtonProps> = ({ children, onClick }) => {
+  return (
+    <button onClick={onClick} className={styles.customButton}>
+      {children}
+    </button>
+  );
+};
+
+type Label = {
+  children: React.ReactNode;
+  htmlFor?: string;
+};
+
+export const CustomLabel: React.FC<Label> = ({ children, htmlFor }) => {
+  return (
+    <label htmlFor={htmlFor} className={styles.customLabel}>
+      {children}
     </label>
   );
 };
 
-export const CustomInput: React.FC<PropsCustomInput> = ({
-  name,
-  placeholder,
-  type = "text",
-}) => {
-  return (
-    <Form.Item
-      name={name}
-      shouldUpdate={true}
-      rules={[{ required: true, message: "Обязательное поле" }]}
-    >
-      <Input
-        className={styles.customInput}
-        placeholder={placeholder}
-        type={type}
-        size="large"
-      />
-    </Form.Item>
-  );
+type FormItemProps = {
+  children: React.ReactNode;
 };
 
-export const CustomTextarea: React.FC<PropsCustomTextArea> = ({
-  name,
-  placeholder,
-  type = "text",
-}) => {
-  return (
-    <Form.Item
-      name={name}
-      shouldUpdate={true}
-      rules={[{ required: true, message: "Обязательное поле" }]}
-    >
-      <TextArea className={styles.customInput} placeholder={placeholder} />
-    </Form.Item>
-  );
+export const FormItem: React.FC<FormItemProps> = ({ children }) => {
+  return <div className={styles.formItem}>{children}</div>;
 };
 
-export const CustomButton: React.FC<PropsCustomButton> = ({
+type FormFlexProps = {
+  children: React.ReactNode;
+  display?: "flex" | "grid";
+  alignItems?: "center" | "flex-start" | "flex-end";
+  justifyContent?: "center" | "flex-start" | "flex-end" | "space-between";
+  gridTemplateColumns?: string;
+  gap?: string;
+};
+
+export const FormFlex: React.FC<FormFlexProps> = ({
   children,
-  htmlType = "button",
-  type,
-  danger,
-  loading,
-  shape,
-  icon,
-  disabled = false,
-  onClick,
+  display = "flex",
+  alignItems = "center",
+  justifyContent = "center",
+  gridTemplateColumns,
+  gap,
 }) => {
   return (
-    <Form.Item>
-      <Button
-        htmlType={htmlType}
-        type={type}
-        danger={danger}
-        loading={loading}
-        shape={shape}
-        icon={icon}
-        onClick={onClick}
-        className={styles.button}
-        disabled={disabled}
-      >
-        {children}
-      </Button>
-    </Form.Item>
-  );
-};
-
-export const CustomCard: React.FC<PropsCustomCard> = ({
-  children,
-  title,
-  bordered = false,
-  width,
-  backgroundColor,
-}) => {
-  return (
-    <Card
-      title={title}
-      bordered={bordered}
-      className={styles.card}
-      style={{ width: width, backgroundColor: backgroundColor }}
+    <div
+      style={{ display, alignItems, justifyContent, gridTemplateColumns, gap }}
     >
       {children}
-    </Card>
+    </div>
   );
 };
