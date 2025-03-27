@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import styles from "./index.module.css";
 import { PATHS } from "../../paths";
@@ -10,7 +11,7 @@ const Header = () => {
         <ul className={styles.menu}>
           <Flex gap="42px">
             <li className={styles.item}>
-              <Link to={PATHS.home}>Поиск</Link>
+              <Link to={PATHS.home}>Главная</Link>
             </li>
             <li className={styles.logo}>MealSearch</li>
             <li className={styles.item}>

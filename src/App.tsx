@@ -25,7 +25,6 @@ function App() {
       const query = ingredients.replace(/\s+/g, "_").toLowerCase().trim();
       const data = await search(query).unwrap();
       setRecipes(data);
-      console.log(recipes);
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +34,7 @@ function App() {
     <Layout>
       <Container>
         <FormItem>
-          <CustomLabel>Ингредиенты:</CustomLabel>
+          <CustomLabel htmlFor="ingredients">Ингредиенты:</CustomLabel>
           <CustomInput
             id="ingredients"
             name="ingredients"

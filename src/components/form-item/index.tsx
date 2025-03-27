@@ -44,8 +44,8 @@ export const CustomSelect: React.FC<SelectProps> = ({
 }) => {
   return (
     <select value={value} onChange={onChange} className={styles.customSelect}>
-      {options.map((item) => (
-        <option>{item}</option>
+      {options.map((item, index) => (
+        <option key={index}>{item}</option>
       ))}
     </select>
   );
