@@ -1,16 +1,15 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { FormAdd } from "./index"; // Измените путь если требуется
-import { useAddRecipeMutation } from "../../app/services/recipes"; // Импортируйте ваш хук
+import { FormAdd } from "./index";
+import { useAddRecipeMutation } from "../../app/services/recipes"; 
 import "@testing-library/jest-dom";
 import { waitFor } from "@testing-library/react";
 
-// Мокируем хук
 jest.mock("../../app/services/recipes", () => ({
   useAddRecipeMutation: jest.fn(),
 }));
 beforeEach(() => {
-  window.alert = jest.fn(); // Мокируем alert
+  window.alert = jest.fn(); 
 });
 
 
@@ -18,15 +17,14 @@ describe("FormAdd", () => {
   const addRecipeMock = jest.fn();
 
   beforeEach(() => {
-    // Назначаем мок функции при каждом тесте
+
     useAddRecipeMutation.mockReturnValue([addRecipeMock]);
     addRecipeMock.mockClear();
   });
 
   test("поля и клик", async () => {
-    render(<FormAdd />); // Рендерим компонент
+    render(<FormAdd />); 
 
-    // Заполняем поля ввода
     fireEvent.change(screen.getByLabelText(/название/i), {
       target: { value: "Новый рецепт" },
     });
@@ -40,10 +38,9 @@ describe("FormAdd", () => {
       target: { value: "https://example.com/photo.jpg" },
     });
 
-    // Нажимаем на кнопку "создать"
     fireEvent.click(screen.getByText(/создать/i));
 
-    // Проверяем, что функция addRecipe была вызвана с правильными данными
+
     expect(addRecipeMock).toHaveBeenCalledWith({
       title: "Новый рецепт",
       description: "Описание нового рецепта",
@@ -65,7 +62,6 @@ describe("FormAdd", () => {
     });
     fireEvent.click(screen.getByText(/создать/i));
 
-    // Проверяем, что alert был вызван
     await waitFor(() => {
       expect(window.alert).toHaveBeenCalledWith(
         "При добавлении рецепта возникла ошибка!"
