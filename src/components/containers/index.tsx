@@ -1,7 +1,5 @@
-import { Layout } from "antd";
 import React from "react";
 import styles from "./index.module.css";
-import Loading from "../loading";
 
 type ContainerProps = {
   children: React.ReactNode;

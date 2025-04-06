@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "./components/layout";
 import { useSearchRecipesMutation } from "./app/services/recipes";
 import { Recipes } from "./features/recipes/recipesSlice";
