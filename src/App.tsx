@@ -23,8 +23,9 @@ function App() {
   const handleSearch = async () => {
     try {
       const query = ingredients.replace(/\s+/g, "_").toLowerCase().trim();
-      const data = await search(query).unwrap();
-      setRecipes(data);
+      const data = await search(query)
+      const unwrap = data?.data || []
+      setRecipes(unwrap);
     } catch (err) {
       console.log(err);
     }

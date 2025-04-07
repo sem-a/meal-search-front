@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { useSearchRecipesMutation } from "./app/services/recipes";
@@ -17,7 +17,6 @@ describe("App Component", () => {
   });
 
   test("вызов и клик", async () => {
-
     render(
       <BrowserRouter>
         <App />
@@ -27,9 +26,10 @@ describe("App Component", () => {
     const input = screen.getByLabelText(/ингредиенты:/i);
     const button = screen.getByText(/поиск/i);
 
-    fireEvent.change(input, { target: { value: "томаты" } });
-
-    fireEvent.click(button);
+    await act(async () => {
+      fireEvent.change(input, { target: { value: "томаты" } });
+      fireEvent.click(button);
+    });
 
     expect(searchRecipesMutationMock).toHaveBeenCalledWith("томаты");
   });
