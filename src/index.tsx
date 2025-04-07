@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import Add from "./pages/add";
 import Edit from "./pages/edit";
-import { Recipe } from "./pages/recipe";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +16,6 @@ const router = createBrowserRouter([
   },
   { path: PATHS.add, element: <Add /> },
   { path: `${PATHS.edit}/:id`, element: <Edit /> },
-  { path: `${PATHS.recipe}/:id`, element: <Recipe /> },
 ]);
 
 const container = document.getElementById("root")!;
