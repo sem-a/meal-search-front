@@ -37,7 +37,7 @@ export const Card: React.FC<Props> = ({
     <div className={styles.card}>
       <div className={styles.header}>
         <div className={styles.title}>
-          <Link to={`${PATHS.recipe}/${id}`}><h2>{title}</h2></Link>
+          <h2>{title}</h2>
         </div>
         <div className={styles.buttons}>
           <Link to={`${PATHS.edit}/${id}`}>изменить</Link>
