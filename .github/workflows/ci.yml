@@ -53,11 +53,6 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker buildx build --platform linux/amd64 -t meal-search-front:latest .
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "sema03" --password-stdin
+        docker buildx build --platform linux/amd64 -t meal-search-front:latest --push .
         docker images
-
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "sema03" --password-stdin
-
-    - name: Push Docker image to Docker Hub
-      run: docker push sema03/meal-search-front:latest
