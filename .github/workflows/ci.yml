@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -19,7 +18,7 @@ jobs:
         node-version: '22'
 
     - name: Install dependencies
-      run: npm install 
+      run: npm install
 
     - name: Build
       run: npm run build
@@ -27,7 +26,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: build
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -38,7 +36,26 @@ jobs:
         node-version: '22'
 
     - name: Install dependencies
-      run: npm install 
+      run: npm install
 
     - name: Run tests
       run: npm test
+
+  docker_build_and_push:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      run: docker build -t meal-search-front:latest .
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/meal-search-front:latest
