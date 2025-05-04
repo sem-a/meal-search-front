@@ -55,7 +55,7 @@ jobs:
       run: docker build -t meal-search-front:latest .
 
     - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "sema03" --password-stdin
 
     - name: Push Docker image to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/meal-search-front:latest
+      run: docker push sema03/meal-search-front:latest
