@@ -52,7 +52,9 @@ jobs:
       uses: docker/setup-buildx-action@v2
 
     - name: Build Docker image
-      run: docker build -t meal-search-front:latest .
+      run: |
+        docker buildx build --platform linux/amd64 -t meal-search-front:latest .
+        docker images
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "sema03" --password-stdin
