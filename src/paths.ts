@@ -3,5 +3,5 @@ export const PATHS = {
   add: "/add",
   recipe: "/recipe",
   edit: "/edit",
-  api: "http://82.97.253.103/api/",
+  api: "http://94.241.143.236/api/",
 } as const;
