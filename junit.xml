@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="20.949">
-  <testsuite name="App Component" errors="0" failures="0" skipped="0" timestamp="2025-06-01T10:35:30" time="12.002" tests="1">
-    <testcase classname="App Component вызов и клик" name="App Component вызов и клик" time="0.115">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="4.35">
+  <testsuite name="App Component" errors="0" failures="0" skipped="0" timestamp="2025-06-01T10:45:28" time="2.132" tests="1">
+    <testcase classname="App Component вызов и клик" name="App Component вызов и клик" time="0.131">
     </testcase>
   </testsuite>
-  <testsuite name="FormAdd" errors="0" failures="0" skipped="0" timestamp="2025-06-01T10:35:30" time="13.056" tests="2">
-    <testcase classname="FormAdd поля и клик" name="FormAdd поля и клик" time="0.163">
+  <testsuite name="FormAdd" errors="0" failures="0" skipped="0" timestamp="2025-06-01T10:45:28" time="2.558" tests="2">
+    <testcase classname="FormAdd поля и клик" name="FormAdd поля и клик" time="0.187">
     </testcase>
-    <testcase classname="FormAdd ошибка" name="FormAdd ошибка" time="0.099">
+    <testcase classname="FormAdd ошибка" name="FormAdd ошибка" time="0.098">
     </testcase>
   </testsuite>
 </testsuites>
