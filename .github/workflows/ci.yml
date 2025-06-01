@@ -76,10 +76,13 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-         args: >
-            -Dsonar.qualitygate.wait=true
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.coverage.exclusions=**/test/**,**/mock/** 
+          args: >
+                -Dsonar.qualitygate.wait=true
+                -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                -Dsonar.coverage.exclusions=**/test/**,**/mock/**
+                -Dsonar.test.inclusions=**/test/**
+                -Dsonar.testExecutionReportPaths=coverage/test-report.xml
+                -Dsonar.javascript.node.maxspace=4096
 
   push_to_registry:
     name: Push Docker image to Docker Hub
