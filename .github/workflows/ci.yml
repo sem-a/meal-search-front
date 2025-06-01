@@ -41,7 +41,7 @@ jobs:
 
     - name: Run tests
       run: npm test -- --coverage
-
+      
   sonarqube:
     name: SonarQube Scan
     runs-on: ubuntu-latest
@@ -63,7 +63,12 @@ jobs:
         run: npm run build
 
       - name: Run Test Coverage
-        run: npm test -- --coverage
+        run: npm test -- --coverage --collectCoverage=true
+
+      - name: Check coverage file
+        run: |
+          cat coverage/lcov.info  # Должен вывести содержимое файла
+          echo "Coverage: $(grep -c '^DA:' coverage/lcov.info) lines"
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -71,9 +76,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: >
+         args: >
             -Dsonar.qualitygate.wait=true
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.coverage.exclusions=**/test/**,**/mock/** 
 
   push_to_registry:
     name: Push Docker image to Docker Hub
