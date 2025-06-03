@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="4.35">
-  <testsuite name="App Component" errors="0" failures="0" skipped="0" timestamp="2025-06-01T10:45:28" time="2.132" tests="1">
-    <testcase classname="App Component вызов и клик" name="App Component вызов и клик" time="0.131">
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="2.95">
+  <testsuite name="App Component" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:07:11" time="1.403" tests="1">
+    <testcase classname="App Component вызов и клик" name="App Component вызов и клик" time="0.09">
     </testcase>
   </testsuite>
-  <testsuite name="FormAdd" errors="0" failures="0" skipped="0" timestamp="2025-06-01T10:45:28" time="2.558" tests="2">
-    <testcase classname="FormAdd поля и клик" name="FormAdd поля и клик" time="0.187">
+  <testsuite name="Card Component" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:07:11" time="1.6" tests="7">
+    <testcase classname="Card Component 1. Рендерит заголовок" name="Card Component 1. Рендерит заголовок" time="0.061">
     </testcase>
-    <testcase classname="FormAdd ошибка" name="FormAdd ошибка" time="0.098">
+    <testcase classname="Card Component 2. Рендерит описание" name="Card Component 2. Рендерит описание" time="0.007">
+    </testcase>
+    <testcase classname="Card Component 3. Рендерит ингредиенты" name="Card Component 3. Рендерит ингредиенты" time="0.007">
+    </testcase>
+    <testcase classname="Card Component 4. Рендерит кнопку &quot;изменить&quot; с правильным ссылкой" name="Card Component 4. Рендерит кнопку &quot;изменить&quot; с правильным ссылкой" time="0.014">
+    </testcase>
+    <testcase classname="Card Component 5. Вызывает onDelete при клике на &quot;удалить&quot;" name="Card Component 5. Вызывает onDelete при клике на &quot;удалить&quot;" time="0.017">
+    </testcase>
+    <testcase classname="Card Component 6. Вызывает deleteRecipe при клике на &quot;удалить&quot;" name="Card Component 6. Вызывает deleteRecipe при клике на &quot;удалить&quot;" time="0.013">
+    </testcase>
+    <testcase classname="Card Component 7. Отображает изображение с правильным alt" name="Card Component 7. Отображает изображение с правильным alt" time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="FormAdd" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:07:11" time="1.738" tests="2">
+    <testcase classname="FormAdd поля и клик" name="FormAdd поля и клик" time="0.149">
+    </testcase>
+    <testcase classname="FormAdd ошибка" name="FormAdd ошибка" time="0.088">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:07:11" time="1.749" tests="3">
+    <testcase classname=" Container компонент рендерится без ошибок" name=" Container компонент рендерится без ошибок" time="0.034">
+    </testcase>
+    <testcase classname=" Flex компонент рендерится без ошибок" name=" Flex компонент рендерится без ошибок" time="0.004">
+    </testcase>
+    <testcase classname=" Flex компонент принимает props" name=" Flex компонент принимает props" time="0.006">
     </testcase>
   </testsuite>
 </testsuites>
