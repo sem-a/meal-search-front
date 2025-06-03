@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="30" failures="0" errors="0" time="4.25">
-  <testsuite name="Layout component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:27" time="2.141" tests="1">
-    <testcase classname="Layout component rendering renders children within the Layout component" name="Layout component rendering renders children within the Layout component" time="0.063">
+<testsuites name="jest tests" tests="30" failures="0" errors="0" time="4.351">
+  <testsuite name="Layout component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:37" time="2.152" tests="1">
+    <testcase classname="Layout component rendering renders children within the Layout component" name="Layout component rendering renders children within the Layout component" time="0.062">
     </testcase>
   </testsuite>
-  <testsuite name="ServerError component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:26" time="2.231" tests="1">
-    <testcase classname="ServerError component rendering renders ServerError component with correct title and message" name="ServerError component rendering renders ServerError component with correct title and message" time="0.134">
+  <testsuite name="Container and Flex component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:37" time="2.235" tests="6">
+    <testcase classname="Container and Flex component rendering renders Container component with children" name="Container and Flex component rendering renders Container component with children" time="0.058">
     </testcase>
-  </testsuite>
-  <testsuite name="Component Rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:27" time="2.327" tests="8">
-    <testcase classname="Component Rendering renders CustomInput" name="Component Rendering renders CustomInput" time="0.058">
+    <testcase classname="Container and Flex component rendering renders Flex component with default props" name="Container and Flex component rendering renders Flex component with default props" time="0.007">
     </testcase>
-    <testcase classname="Component Rendering renders CustomSelect" name="Component Rendering renders CustomSelect" time="0.127">
-    </testcase>
-    <testcase classname="Component Rendering renders CustomTextarea" name="Component Rendering renders CustomTextarea" time="0.007">
-    </testcase>
-    <testcase classname="Component Rendering renders CustomButton" name="Component Rendering renders CustomButton" time="0.007">
-    </testcase>
-    <testcase classname="Component Rendering renders CustomLabel" name="Component Rendering renders CustomLabel" time="0.008">
-    </testcase>
-    <testcase classname="Component Rendering renders FormItem" name="Component Rendering renders FormItem" time="0.012">
-    </testcase>
-    <testcase classname="Component Rendering renders FormFlex" name="Component Rendering renders FormFlex" time="0.005">
-    </testcase>
-    <testcase classname="Component Rendering renders nested components" name="Component Rendering renders nested components" time="0.006">
-    </testcase>
-  </testsuite>
-  <testsuite name="Container and Flex component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:27" time="2.334" tests="6">
-    <testcase classname="Container and Flex component rendering renders Container component with children" name="Container and Flex component rendering renders Container component with children" time="0.156">
-    </testcase>
-    <testcase classname="Container and Flex component rendering renders Flex component with default props" name="Container and Flex component rendering renders Flex component with default props" time="0.008">
-    </testcase>
-    <testcase classname="Container and Flex component rendering renders Flex component with custom alignItems" name="Container and Flex component rendering renders Flex component with custom alignItems" time="0.006">
+    <testcase classname="Container and Flex component rendering renders Flex component with custom alignItems" name="Container and Flex component rendering renders Flex component with custom alignItems" time="0.008">
     </testcase>
     <testcase classname="Container and Flex component rendering renders Flex component with custom justifyContent" name="Container and Flex component rendering renders Flex component with custom justifyContent" time="0.005">
     </testcase>
-    <testcase classname="Container and Flex component rendering renders Flex component with gap" name="Container and Flex component rendering renders Flex component with gap" time="0.027">
+    <testcase classname="Container and Flex component rendering renders Flex component with gap" name="Container and Flex component rendering renders Flex component with gap" time="0.023">
     </testcase>
-    <testcase classname="Container and Flex component rendering renders nested components" name="Container and Flex component rendering renders nested components" time="0.008">
-    </testcase>
-  </testsuite>
-  <testsuite name="Card Component" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:27" time="2.374" tests="7">
-    <testcase classname="Card Component 1. Рендерит заголовок" name="Card Component 1. Рендерит заголовок" time="0.128">
-    </testcase>
-    <testcase classname="Card Component 2. Рендерит описание" name="Card Component 2. Рендерит описание" time="0.029">
-    </testcase>
-    <testcase classname="Card Component 3. Рендерит ингредиенты" name="Card Component 3. Рендерит ингредиенты" time="0.009">
-    </testcase>
-    <testcase classname="Card Component 4. Рендерит кнопку &quot;изменить&quot; с правильным ссылкой" name="Card Component 4. Рендерит кнопку &quot;изменить&quot; с правильным ссылкой" time="0.015">
-    </testcase>
-    <testcase classname="Card Component 5. Вызывает onDelete при клике на &quot;удалить&quot;" name="Card Component 5. Вызывает onDelete при клике на &quot;удалить&quot;" time="0.04">
-    </testcase>
-    <testcase classname="Card Component 6. Вызывает deleteRecipe при клике на &quot;удалить&quot;" name="Card Component 6. Вызывает deleteRecipe при клике на &quot;удалить&quot;" time="0.01">
-    </testcase>
-    <testcase classname="Card Component 7. Отображает изображение с правильным alt" name="Card Component 7. Отображает изображение с правильным alt" time="0.014">
+    <testcase classname="Container and Flex component rendering renders nested components" name="Container and Flex component rendering renders nested components" time="0.01">
     </testcase>
   </testsuite>
-  <testsuite name="Header component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:26" time="2.481" tests="1">
-    <testcase classname="Header component rendering renders Header component with links and logo" name="Header component rendering renders Header component with links and logo" time="0.329">
+  <testsuite name="Component Rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:37" time="2.33" tests="8">
+    <testcase classname="Component Rendering renders CustomInput" name="Component Rendering renders CustomInput" time="0.061">
+    </testcase>
+    <testcase classname="Component Rendering renders CustomSelect" name="Component Rendering renders CustomSelect" time="0.096">
+    </testcase>
+    <testcase classname="Component Rendering renders CustomTextarea" name="Component Rendering renders CustomTextarea" time="0.013">
+    </testcase>
+    <testcase classname="Component Rendering renders CustomButton" name="Component Rendering renders CustomButton" time="0.007">
+    </testcase>
+    <testcase classname="Component Rendering renders CustomLabel" name="Component Rendering renders CustomLabel" time="0.006">
+    </testcase>
+    <testcase classname="Component Rendering renders FormItem" name="Component Rendering renders FormItem" time="0.029">
+    </testcase>
+    <testcase classname="Component Rendering renders FormFlex" name="Component Rendering renders FormFlex" time="0.006">
+    </testcase>
+    <testcase classname="Component Rendering renders nested components" name="Component Rendering renders nested components" time="0.008">
     </testcase>
   </testsuite>
-  <testsuite name="recipesSlice" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:29" time="0.206" tests="3">
-    <testcase classname="recipesSlice должен возвращать начальное состояние" name="recipesSlice должен возвращать начальное состояние" time="0.003">
+  <testsuite name="Card Component" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:37" time="2.347" tests="7">
+    <testcase classname="Card Component 1. Рендерит заголовок" name="Card Component 1. Рендерит заголовок" time="0.076">
     </testcase>
-    <testcase classname="recipesSlice должен обрабатывать getAllRecipes.fulfilled" name="recipesSlice должен обрабатывать getAllRecipes.fulfilled" time="0.002">
+    <testcase classname="Card Component 2. Рендерит описание" name="Card Component 2. Рендерит описание" time="0.01">
+    </testcase>
+    <testcase classname="Card Component 3. Рендерит ингредиенты" name="Card Component 3. Рендерит ингредиенты" time="0.092">
+    </testcase>
+    <testcase classname="Card Component 4. Рендерит кнопку &quot;изменить&quot; с правильным ссылкой" name="Card Component 4. Рендерит кнопку &quot;изменить&quot; с правильным ссылкой" time="0.023">
+    </testcase>
+    <testcase classname="Card Component 5. Вызывает onDelete при клике на &quot;удалить&quot;" name="Card Component 5. Вызывает onDelete при клике на &quot;удалить&quot;" time="0.018">
+    </testcase>
+    <testcase classname="Card Component 6. Вызывает deleteRecipe при клике на &quot;удалить&quot;" name="Card Component 6. Вызывает deleteRecipe при клике на &quot;удалить&quot;" time="0.014">
+    </testcase>
+    <testcase classname="Card Component 7. Отображает изображение с правильным alt" name="Card Component 7. Отображает изображение с правильным alt" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="ServerError component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:37" time="2.382" tests="1">
+    <testcase classname="ServerError component rendering renders ServerError component with correct title and message" name="ServerError component rendering renders ServerError component with correct title and message" time="0.248">
+    </testcase>
+  </testsuite>
+  <testsuite name="Header component rendering" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:37" time="2.456" tests="1">
+    <testcase classname="Header component rendering renders Header component with links and logo" name="Header component rendering renders Header component with links and logo" time="0.297">
+    </testcase>
+  </testsuite>
+  <testsuite name="FormAdd" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:37" time="2.532" tests="2">
+    <testcase classname="FormAdd поля и клик" name="FormAdd поля и клик" time="0.248">
+    </testcase>
+    <testcase classname="FormAdd ошибка" name="FormAdd ошибка" time="0.145">
+    </testcase>
+  </testsuite>
+  <testsuite name="App Component" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:39" time="0.36" tests="1">
+    <testcase classname="App Component вызов и клик" name="App Component вызов и клик" time="0.039">
+    </testcase>
+  </testsuite>
+  <testsuite name="recipesSlice" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:56:40" time="0.349" tests="3">
+    <testcase classname="recipesSlice должен возвращать начальное состояние" name="recipesSlice должен возвращать начальное состояние" time="0.002">
+    </testcase>
+    <testcase classname="recipesSlice должен обрабатывать getAllRecipes.fulfilled" name="recipesSlice должен обрабатывать getAllRecipes.fulfilled" time="0.001">
     </testcase>
     <testcase classname="recipesSlice селектор selectRecipes возвращает данные" name="recipesSlice селектор selectRecipes возвращает данные" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="FormAdd" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:27" time="2.556" tests="2">
-    <testcase classname="FormAdd поля и клик" name="FormAdd поля и клик" time="0.327">
-    </testcase>
-    <testcase classname="FormAdd ошибка" name="FormAdd ошибка" time="0.102">
-    </testcase>
-  </testsuite>
-  <testsuite name="App Component" errors="0" failures="0" skipped="0" timestamp="2025-06-03T18:53:29" time="0.421" tests="1">
-    <testcase classname="App Component вызов и клик" name="App Component вызов и клик" time="0.04">
     </testcase>
   </testsuite>
 </testsuites>
