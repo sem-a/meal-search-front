@@ -1,4 +1,4 @@
-import recipesReducer, { selectRecipes, InitialState } from "./recipesSlice";
+import recipesReducer, { selectRecipes, initialState } from "./recipesSlice";
 import { RootState } from "../../app/store";
 
 // Мокаем весь модуль recipesApi
