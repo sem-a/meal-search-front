@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
@@ -7,55 +7,68 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  # CI часть (build → test → SonarQube → Docker push)
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build
-      run: npm run build
+      - name: Build
+        run: npm run build
 
-    - name: Notify Telegram (Build Success)
-      if: success()
-      run: |
-        curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-        -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-        -d "text=✅ BUILD SUCCESSFUL%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}%0A💻 Commit: ${GITHUB_SHA:0:7}%0A📄 Message: $(git log -1 --pretty=%B)"
+      - name: Notify Telegram (Build Success)
+        if: success()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=✅ BUILD SUCCESSFUL%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}%0A💻 Commit: ${GITHUB_SHA:0:7}%0A📄 Message: $(git log -1 --pretty=%B)"
+
+      - name: Notify Telegram (Build Failed)
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=❌ BUILD FAILED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}%0A💻 Commit: ${GITHUB_SHA:0:7}%0A📄 Message: $(git log -1 --pretty=%B)"
 
   test:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm test -- --coverage
+      - name: Run tests
+        run: npm test -- --coverage
 
-    - name: Notify Telegram (Tests Success)
-      if: success()
-      run: |
-        curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-        -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-        -d "text=✅ TESTS PASSED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}%0A📊 Coverage: $(grep -c '^DA:' coverage/lcov.info) lines"
+      - name: Notify Telegram (Tests Success)
+        if: success()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=✅ TESTS PASSED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}%0A📊 Coverage: $(grep -c '^DA:' coverage/lcov.info) lines"
+
+      - name: Notify Telegram (Tests Failed)
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=❌ TESTS FAILED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}"
 
   sonarqube:
     name: SonarQube Scan
@@ -69,10 +82,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22'
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
 
       - name: Run Test Coverage
         run: npm test -- --coverage --collectCoverage=true
+
+      - name: Check coverage file
+        run: |
+          cat coverage/lcov.info
+          echo "Coverage: $(grep -c '^DA:' coverage/lcov.info) lines"
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -81,22 +105,35 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >
-                -Dsonar.qualitygate.wait=true
-                -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.coverage.exclusions=**/test/**,**/mock/**
+            -Dsonar.test.inclusions=**/test/**
+            -Dsonar.javascript.node.maxspace=4096
 
       - name: Notify Telegram (SonarQube Success)
         if: success()
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d "text=✅ SONARQUBE ANALYSIS PASSED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}"
+          -d "text=✅ SONARQUBE ANALYSIS PASSED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}%0A📊 Coverage: $(grep -c '^DA:' coverage/lcov.info) lines"
+
+      - name: Notify Telegram (SonarQube Failed)
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=❌ SONARQUBE ANALYSIS FAILED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}"
 
   push_to_registry:
-    name: Push Docker image
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: sonarqube
     permissions:
       packages: write
+      contents: read
+      attestations: write
+      id-token: write
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -107,30 +144,47 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: sema03/meal-search-front
+
+      - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
+          context: .
+          file: ./Dockerfile
           push: true
-          tags: sema03/meal-search-front:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Notify Telegram (Docker Push Success)
         if: success()
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d "text=✅ DOCKER IMAGE PUSHED%0A%0A📌 Branch: ${{ github.ref }}%0A🐳 Image: sema03/meal-search-front:latest"
+          -d "text=✅ DOCKER IMAGE PUSHED TO HUB%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}%0A🐳 Image: sema03/meal-search-front:${{ steps.meta.outputs.version }}"
 
-  # CD часть (запускается ТОЛЬКО после успешного CI)
+      - name: Notify Telegram (Docker Push Failed)
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=❌ DOCKER PUSH FAILED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}"
+
   deploy:
     name: Deploy to Kubernetes
     runs-on: ubuntu-latest
-    needs: push_to_registry  # Зависит от успешного завершения Docker push
+    needs: push_to_registry
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Install kubectl
         uses: azure/setup-kubectl@v3
+        with:
+          version: "latest"
 
       - name: Configure Kubeconfig
         run: |
@@ -154,3 +208,10 @@ jobs:
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
           -d "text=🚀 DEPLOY SUCCESSFUL%0A%0A📌 Branch: ${{ github.ref }}%0A🌐 Service URL: ${{ steps.service.outputs.url }}"
+
+      - name: Notify Telegram (Deploy Failed)
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=❌ DEPLOY FAILED%0A%0A📌 Branch: ${{ github.ref }}%0A🔄 Workflow: ${{ github.workflow }}"Ï
